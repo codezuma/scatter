@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'plus jakarta';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Roboto Regular'), url('PlusJakartaSans-Regular.woff') format('woff');
+    }
+@font-face {
+    font-family: 'plus jakarta medium';
+    font-style: normal;
+    font-weight: normal;
+    color: rgb(175, 11, 11);
+    src: local('Roboto Regular'), url('PlusJakartaSans-Medium.woff') format('woff');
+    }
+    

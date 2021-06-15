@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>invoice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: montserrat;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background_color: #02044A;
+            --background_color_hover: #0f1058;
+            --background_color_active: #20228f;
+            --font_color: white;
+            --grey_color: #494A7D;
+            --secondary_font_color: #a6a6c2;
+            --primary_gradient: linear-gradient(90deg, #D81E5B, #AF4A96);
+            --green: #04A777;
+            --secondary_font: raleway;
+            --background: #EFEFF5;
+            --primary: #292B48;
+            --purple: #9E6DE0;
+            --light: #646c9a;
+            --dark_light: #373d5f;
+            --light_hover: #b7baca;
+        }
+
+        body {
+            background-color: var(--background);
+            padding: 5% 0;
+
+        }
+
+        .invoice_con {
+            width: 1000px;
+            min-height: 100vh;
+            border: 2px solid var(--light_hover);
+            background-color: white;
+
+        }
+
+        .flex {
+            display: flex;
+
+            justify-content: center;
+        }
+
+        .company_detail_box {
+            width: 100%;
+            justify-content: space-between;
+            background-color: var(--background);
+            padding-bottom: 50px;
+
+        }
+
+        .company_detail_box .right_box {
+            align-items: none;
+        }
+
+        .company_detail_box .left_box {
+            padding-left: 20px;
+        }
+
+        .company_detail_box h1 {
+            font-weight: 500;
+            color: var(--background_color_active);
+            margin-top: 20px;
+        }
+
+        .company_detail_box h2 {
+            font-weight: 500;
+            color: var(--background_color_active);
+            margin-top: 50px;
+        }
+
+        .invoice_number {
+            min-width: 80px;
+            height: 80px;
+            background-color: var(--green);
+            margin-right: 100px;
+            color: white;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        .customer_info_table {
+            margin-top: 20px;
+            row-gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .invoice_head {
+            width: 220px;
+            padding: 2% 0;
+            font-weight: 600;
+            color: var(--background_color);
+        }
+
+        .invoice_data {
+            padding: 2% 0;
+
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .customer_name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--background_color_active);
+            margin-top: 10px;
+        }
+
+        .company_addrees {
+            font-weight: 500;
+            color: var(--dark_light);
+            width: 18rem;
+            margin-top: 10px;
+        }
+
+        .purchase_table {
+            margin-top:50px;
+            width: 100%;
+            padding-bottom: 20px;
+            transition: 1s ease-in;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .table_head {
+            width: 90%;
+            background-color: var(--green);
+        }
+
+        .purchase_table .head {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            color: whitesmoke;
+            border-right: 2px whitesmoke solid;
+            padding-left: 10px;
+        }
+
+        .item_description_head {
+            width: 40%;
+        }
+
+        .serial_number_head {
+            width: 10%;
+        }
+
+        .price_head {
+            width: 15%;
+        }
+
+        .quantity_head {
+            width: 17.5%;
+        }
+
+        .total_head {
+            width: 17.5%;
+        }
+        .item_row {
+
+            animation-fill-mode: forwards;
+        }
+        .item_data{
+            width: 90%;
+            box-shadow: 0px 6px 8px -6px rgba(24, 39, 75, 0.12), 0px 8px 16px -6px rgba(24, 39, 75, 0.08);
+            animation: row_appear .5s 1;
+            background-color: white;
+            overflow: hidden;
+        }
+        .item_data .head{
+            font-weight: 500;
+            color: rgb(22, 21, 21) !important;
+        }
+
+        .item_row .head {
+            height: 50px;
+            padding: 0;
+            border: none;
+            border-right: 2px solid rgb(221, 220, 220);
+
+        }
+
+        .item_row .head:last-child {
+            border: none;
+        }
+
+        .purchase_table_input_ele {
+            width: 100%;
+            height: 100%;
+            caret-color: var(--grey_color);
+            font-family: 'plus jakarta medium';
+            font-size: 1.1rem;
+            outline: none;
+            border-radius: 3px;
+            border: none;
+            padding: 10px 10px;
+            text-transform: capitalize;
+            color: var(--dark_light);
+        }
+
+        input[type=number]::-webkit-outer-spin-button {
+            appearance: none;
+        }
+
+        .purchase_table_input_ele:focus {
+            border: 2px solid var(--light);
+        }
+
+        .serial_number_ele_box,
+        .total_head_ele_box {
+            padding-left: 10px !important;
+            color: var(--dark_light) !important;
+            font-family: 'plus jakarta medium';
+        }
+       
+.total_box{
+    width: 33.5%;
+    flex-direction: row;
+}
+.total_box_con{
+    justify-content: flex-end;
+    width: 95%;
+}
+.total_head_box,.total_data_box{
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+}
+.total_data_item,.total_head_item{
+    padding-left:10px;
+    margin-top: 7px;
+    font-family: 'plus jakarta medium';
+    color: var(--background_color_active);
+    font-size: 1.2rem;
+
+}
+.total_head_item{
+    font-weight: 600;
+    color: var(--background_color);
+    
+}
+.total_head_item:last-child,.total_data_item:last-child{
+    margin-top: 15px;
+    border-top:2px var(--green) solid;
+    font-size: 1.4rem;
+    color: var(--green);
+    letter-spacing: 1.5px;
+}
+
+footer{
+    margin-top: 50px;
+    width: 100%;
+    min-height: 50px;
+    padding: 2% 5%;
+    background-color: var(--green);
+    justify-content: space-between !important;
+}
+.footer_company_details_box,.footer_company_contact_box{
+    width: 35%;
+}
+.footer_ele{
+    color: whitesmoke;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.25rem;
+}
+    </style>
+</head>
+
+<body class="flex">
+    <div class="invoice_con">
+        <div class="company_detail_box flex">
+            <div class="left_box">
+                <h1>INVOICE</h1>
+                <h2>To </h2>
+                <table class="customer_info_table">
+                    <tr class="customer_info_table_tr">
+                        <td class="invoice_head">Customer Name : </td>
+                        <td class="invoice_data" id="customer_name">Chandresh Patidar</td>
+                    </tr>
+                    <tr class="customer_info_table_tr">
+                        <td class="invoice_head">Phone number &nbsp;&nbsp;: </td>
+                        <td class="invoice_data" id="customer_phone_number">978405657</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="right_box">
+                <div class="invoice_number flex" id='invoice_number'>#01</div>
+              
+            </div>
+        </div>
+        <div class="purchase_table flex">
+            <div class="table_head flex">
+                <div class="serial_number_head head">SL.</div>
+                <div class="item_description_head head">Description</div>
+                <div class="price_head head">Price</div>
+                <div class="quantity_head head">Quantity</div>
+                <div class="total_head head">Total</div>
+            </div>
+
+        </div>
+        <div class="total_box_con flex">
+            <div class="total_box flex">
+                <div class="total_head_box">
+                    <div class="total_head_item">Sub-Total</div>
+                    <div class="total_head_item">Tax</div>
+                    <div class="total_head_item">Total</div>
+                </div>
+                <div class="total_data_box">
+                    <div class="total_data_item" id="sub_total">&#8377; 0</div>
+                    <div class="total_data_item" id="tax_total"> &nbsp;</div>
+                    <div class="total_data_item" id="final_total">&#8377; 0</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="flex">
+            <div class="footer_company_details_box">
+                <div class="footer_ele" id="company_name">FEXIca lsjdf</div>
+                <div class="footer_ele" id="company_addrees">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur sunt reiciendis quis magni doloremque adipisci recusandae ut numquam? Exercitationem quidem </div>
+            </div>
+            <div class="footer_company_contact_box">
+                <div class="footer_ele">CONTACT US</div>
+                <div class=" footer_ele" id='footer_contact_details'></div>
+            </div>
+        </footer>
+
+    </div>
+</body>
+<script>
+    //function to fetch data from storage to invoice page
+    function data_in_invoice(){
+        var invoice_data_json = sessionStorage.getItem('current_invoice');
+        var invoice_data = JSON.parse(invoice_data_json);
+        console.table(invoice_data);
+
+        //writing data in page
+        var customer_name = document.getElementById('customer_name');
+        customer_name.innerHTML = invoice_data.customer_name;
+
+        var customer_phone_number = document.getElementById('customer_phone_number');
+        customer_phone_number.innerHTML = invoice_data.customer_phone_number;
+ 
+        var invoice_number = document.getElementById('invoice_number');
+        invoice_number.innerHTML = invoice_data.invoice_number;
+ 
+        var customer_phone_number = document.getElementById('customer_phone_number');
+        customer_phone_number.innerHTML = invoice_data.customer_phone_number;
+ 
+        // purchasing table entry
+        var item_description_array = invoice_data.item_description_array;
+        var price_ele_array = invoice_data.price_ele_array;
+        var total_ele_array = invoice_data.total_ele_array;
+        var quantity_ele_array = invoice_data.quantity_ele_array;
+        var purchase_table = document.getElementsByClassName('purchase_table')[0];
+        for(i=0;i<item_description_array.length;i++){
+             
+            var table_head = document.createElement('DIV');
+            table_head.classList.add('table_head');
+            table_head.classList.add('item_data');
+            table_head.classList.add('flex');
+            purchase_table.appendChild(table_head);
+             
+            var serial_number_head = document.createElement('DIV');
+            serial_number_head.classList.add('serial_number_head');
+            serial_number_head.classList.add('head');
+            serial_number_head.innerHTML = i+1+'.';
+            table_head.appendChild(serial_number_head);
+                          
+            var item_description_head = document.createElement('DIV');
+            item_description_head.classList.add('item_description_head');
+            item_description_head.classList.add('head');
+            item_description_head.innerHTML = item_description_array[i];
+            table_head.appendChild(item_description_head);
+
+            var price_head = document.createElement('DIV');
+            price_head.classList.add('price_head');
+            price_head.classList.add('head');
+            price_head.innerHTML = price_ele_array[i];
+            table_head.appendChild(price_head);
+
+            var quantity_head = document.createElement('DIV');
+            quantity_head.classList.add('quantity_head');
+            quantity_head.classList.add('head');
+            quantity_head.innerHTML = quantity_ele_array[i];
+            table_head.appendChild(quantity_head);
+
+            var total_head = document.createElement('DIV');
+            total_head.classList.add('total_head');
+            total_head.classList.add('head');
+            total_head.innerHTML = total_ele_array[i];
+            table_head.appendChild(total_head);
+            
+        }
+        var sub_total= document.getElementById('sub_total');
+        sub_total.innerHTML = invoice_data.sub_total; 
+
+        var sub_total= document.getElementById('final_total');
+        sub_total.innerHTML = invoice_data.final_total; 
+                          
+        var total_head_item = document.getElementsByClassName('total_head_item');
+        var total_head_box = document.getElementsByClassName('total_head_box')[0];
+        var total_data_item = document.getElementsByClassName('total_data_item');
+        var total_data_box = document.getElementsByClassName('total_data_box')[0];
+
+        for(i=0;i<invoice_data.tax_name_array.length;i++){
+
+        
+        var tax_name_invoice = document.createElement('div');
+        tax_name_invoice.classList.add('total_head_item');
+        total_head_box.insertBefore(tax_name_invoice,total_head_item[total_head_item.length-1])
+        tax_name_invoice.style.fontSize = '1rem';
+        tax_name_invoice.innerHTML = invoice_data.tax_name_array[i];
+
+
+        
+        var tax_percentage_invoice = document.createElement('div');
+        tax_percentage_invoice.classList.add('total_data_item');
+        tax_percentage_invoice.classList.add('tax_items');
+        total_data_box.insertBefore(tax_percentage_invoice,total_data_item[total_data_item.length-1])
+        tax_percentage_invoice.innerHTML = invoice_data.tax_items_array[i];;
+        tax_percentage_invoice.style.fontSize = '1rem';
+        
+    }
+     // fetching company details from the local storage
+     var company_details_json = localStorage.getItem('company_details');
+        var company_details = JSON.parse(company_details_json);
+
+        var company_name = company_details.company_name;
+        var company_addrees = company_details.address;
+        var company_phone_number = company_details.phone_number;
+        var company_email = company_details.email;
+        
+        document.getElementById('company_name').innerHTML = company_name;
+        document.getElementById('company_addrees').innerHTML = company_addrees;  
+        document.getElementById('footer_contact_details').innerHTML = company_phone_number+'<br>0'+company_email;  
+
+        let doc = new jsPDF('p','pt','a4');
+
+        doc.addHTML(document.getElementsByClassName('invoice_con')[0],function() {
+        doc.save('invoice.pdf');
+         });
+}
+    data_in_invoice();
+</script>
+</html>
