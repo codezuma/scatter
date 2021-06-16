@@ -8,9 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>profile</title>
 </head>
-
+ 
 <body class="flex">
-    <div class="app_box flex">
+    <!--       main app box -->
+  <div class="app_box flex">
+
+<!-- side bar to control navigation  -->
         <div class="side_box flex">
             <div class="nav_head flex ">
                 <div class="app_icon"></div>
@@ -81,6 +84,9 @@
             </div>
 
         </div>
+<!--         side bar code ends here -->
+
+<!--       dash board code starts here -->
         <div class="dashboard">
             <div class="dashboard_head">
                 <div class="ham_icon flex" id="ham_icon">
@@ -104,10 +110,11 @@
                     <div class="profile_icon"></div>
                 </div>
             </div>
+
             <div class="main_dashboard_box" >
                 <div class="inner_dashboard_box">
                     <div class="dashboard_item"></div>
-                    <div class="dashboard_item invoice_app">
+                    <div class="dashboard_item invoice_app" id="invoice_app">
 
                         <div class="invoice_app_upper_box flex">
                             <div class="customer_info_box">
@@ -204,7 +211,7 @@
                         </div>
                         
                     </div>
-                    <div class="dashboard_item tax_app">
+                    <div class="dashboard_item tax_app" id="tax_app">
                         <div class="main_tax_app flex">
                             <div class="left_tax_app">
 
@@ -228,8 +235,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="dashboard_item company_details_page flex">
+                    <div class="dashboard_item company_details_page flex" id="company_details_page" >
                         <div class="header_company_details flex">
                             <h1>Your profile </h1>
                             <div class="button_box">
@@ -282,7 +288,9 @@
                 </div>
             </div>
         </div>
+<!--         dashboard code ends here -->
     </div>
+
 </body>
 <script src="js/profile.js"></script>
 

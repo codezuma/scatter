@@ -63,6 +63,7 @@ var address = document.getElementById("address");
 var website_url = document.getElementById("website_url");
 var financial_year = document.getElementById("financial_year");
 var profile_picture_box = document.getElementsByClassName("profile_picture_box")[0];
+
 function put_data() {
     company_name.value = company_details.company_name;
     mailing_name.value = company_details.mailing_name;
@@ -71,9 +72,9 @@ function put_data() {
     address.value = company_details.address;
     website_url.value = company_details.website_url;
     financial_year.value = company_details.financial_year;
-    profile_picture_box.style.background = 'url('+company_details.company_logo+')';
+    profile_picture_box.style.background = 'url(' + company_details.company_logo + ')';
     var profile_icon = document.getElementsByClassName("profile_icon")[0];
-   profile_icon.style.background  = 'url('+company_details.company_logo+')';
+    profile_icon.style.background = 'url(' + company_details.company_logo + ')';
 
 }
 window.onload = put_data();
@@ -100,9 +101,9 @@ document.getElementById("save_changes_btn").onclick = function () {
     company_details.address = address.value;
     company_details.website_url = website_url.value;
     company_details.financial_year = financial_year.value;
-     
+
     var json_company_details = JSON.stringify(company_details);
-    localStorage.setItem('company_details',json_company_details);
+    localStorage.setItem('company_details', json_company_details);
     location.reload();
 }
 //discard changes 
@@ -110,28 +111,28 @@ document.getElementById("discard_changes_btn").onclick = function () {
     location.reload();
 }
 // profile_picture funtion
-document.getElementById("pp_uplaod_button").onclick = function(){
+document.getElementById("pp_uplaod_button").onclick = function () {
     var profile_picture_box = document.getElementsByClassName("profile_picture_box")[0];
     var upload_input = document.createElement('input');
     upload_input.type = "file";
     upload_input.click();
-    upload_input.accept="image/*";
+    upload_input.accept = "image/*";
     profile_picture_box.style.backgroundSize = "cover";
-    upload_input.onchange=function(){
+    upload_input.onchange = function () {
         var freader = new FileReader();
         freader.readAsDataURL(upload_input.files[0]);
-        freader.onload=function(){
-            profile_picture_box.style.background = 'url('+freader.result+')';
+        freader.onload = function () {
+            profile_picture_box.style.background = 'url(' + freader.result + ')';
             company_details['company_logo'] = freader.result;
             save_data();
         }
     }
-   
+
 }
 // fucntion to save data in localstorage
-function save_data(){
+function save_data() {
     var json_company_details = JSON.stringify(company_details);
-    localStorage.setItem('company_details',json_company_details);
+    localStorage.setItem('company_details', json_company_details);
 }
 
 
@@ -217,10 +218,10 @@ document.getElementsByClassName("add_item_button")[0].onclick = function () {
 
 function calculate_total_item() {
     var quantity_elements = document.getElementsByClassName('quantity_head_ele');
-    var price_elements= document.getElementsByClassName('price_head_ele');
+    var price_elements = document.getElementsByClassName('price_head_ele');
 
     for (i = 0; i < quantity_elements.length; i++) {
-        quantity_elements[i].oninput =     function () {
+        quantity_elements[i].oninput = function () {
             var parent_ele = this.parentElement;
             var item_box = parent_ele.parentElement;
             var quantity = item_box.getElementsByClassName('quantity_head_ele')[0];
@@ -229,7 +230,7 @@ function calculate_total_item() {
             total.innerHTML = '&#8377; ' + Number(quantity.value) * Number(price.value);
             calculating_total();
         }
-        price_elements[i].oninput =     function () {
+        price_elements[i].oninput = function () {
             var parent_ele = this.parentElement;
             var item_box = parent_ele.parentElement;
             var quantity = item_box.getElementsByClassName('quantity_head_ele')[0];
@@ -384,8 +385,8 @@ function tax_in_app(data) {
     var tax_name_invoice = document.createElement('div');
     tax_name_invoice.classList.add('total_head_item');
     tax_name_invoice.classList.add('tax_name_invoice');
-    total_head_box.insertBefore(tax_name_invoice,total_head_item[total_head_item.length-1])
-    tax_name_invoice.innerHTML = data_object.tax_name+'('+data_object.tax_percentage+' %)';
+    total_head_box.insertBefore(tax_name_invoice, total_head_item[total_head_item.length - 1])
+    tax_name_invoice.innerHTML = data_object.tax_name + '(' + data_object.tax_percentage + ' %)';
     tax_name_invoice.style.fontSize = '1rem';
 
 
@@ -397,8 +398,8 @@ function tax_in_app(data) {
     var tax_percentage_invoice = document.createElement('div');
     tax_percentage_invoice.classList.add('total_data_item');
     tax_percentage_invoice.classList.add('tax_items');
-    tax_percentage_invoice.setAttribute('tax_percentage',data_object.tax_percentage);
-    total_data_box.insertBefore(tax_percentage_invoice,total_data_item[total_data_item.length-1])
+    tax_percentage_invoice.setAttribute('tax_percentage', data_object.tax_percentage);
+    total_data_box.insertBefore(tax_percentage_invoice, total_data_item[total_data_item.length - 1])
     tax_percentage_invoice.innerHTML = '&#8377; 0';
     tax_percentage_invoice.style.fontSize = '1rem';
 
@@ -408,14 +409,14 @@ function tax_in_app(data) {
     delete_tax.classList.add('flex');
     tax_ele.appendChild(delete_tax);
     delete_tax.innerHTML = ' <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="red"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>';
-    delete_tax_data(delete_tax,data_object.tax_name);
+    delete_tax_data(delete_tax, data_object.tax_name);
 
 
 }
 //function for deleting tax data 
-function delete_tax_data(delete_icon,key){
-    var tax_name = 'tax_'+key;
-    delete_icon.onclick = function(){
+function delete_tax_data(delete_icon, key) {
+    var tax_name = 'tax_' + key;
+    delete_icon.onclick = function () {
         localStorage.removeItem(tax_name);
         location.reload();
     }
@@ -423,34 +424,34 @@ function delete_tax_data(delete_icon,key){
 
 //calcul;ating sub total
 
-function calculating_total(){
+function calculating_total() {
     var total_head_ele_box = document.getElementsByClassName('total_head_ele_box');
     var sub_total_ele = document.getElementById('sub_total');
-    var sub_total=0;
-    var tax_total=0;
+    var sub_total = 0;
+    var tax_total = 0;
 
-    for(i=0;i<total_head_ele_box.length;i++){
+    for (i = 0; i < total_head_ele_box.length; i++) {
         var data = total_head_ele_box[i].innerHTML;
 
         var splited_data = data.split(' ');
         console.log(splited_data[1]);
-        sub_total = sub_total+Number(splited_data[1]);
+        sub_total = sub_total + Number(splited_data[1]);
     }
-    sub_total_ele.innerHTML = '&#8377; '+sub_total;
+    sub_total_ele.innerHTML = '&#8377; ' + sub_total;
     //calcualting tax
     var tax_items = document.getElementsByClassName('tax_items');
-    for(i=0;i<tax_items.length;i++){
+    for (i = 0; i < tax_items.length; i++) {
         var tax_percentage = tax_items[i].getAttribute('tax_percentage');
-        tax_total =+ (sub_total/100)*tax_percentage;
-        tax_items[i].innerHTML = '&#8377; '+(sub_total/100)*tax_percentage;
+        tax_total = +(sub_total / 100) * tax_percentage;
+        tax_items[i].innerHTML = '&#8377; ' + (sub_total / 100) * tax_percentage;
     }
     //final total code
     var final_total = document.getElementById('final_total');
-    final_total.innerHTML = '&#8377; '+(sub_total+tax_total);
+    final_total.innerHTML = '&#8377; ' + (sub_total + tax_total);
 
 }
 //saving the invoice
-document.getElementById('save_button').onclick = function(){
+document.getElementById('save_button').onclick = function () {
     var customer_name = document.getElementById('customer_name').value;
     var customer_phone_number = document.getElementById('customer_phone_number').value;
     var customer_Email = document.getElementById('customer_Email').value;
@@ -466,86 +467,88 @@ document.getElementById('save_button').onclick = function(){
 
     var final_total = document.getElementById('final_total').innerHTML;
 
-   var item_description_array =[];
-   for(i=0;i<item_description_ele.length;i++){
-       item_description_array[i] = item_description_ele[i].value;
-   } 
-
-
-   var quantity_ele_array =[];
-   for(i=0;i<quantity_head_ele.length;i++){
-    quantity_ele_array[i] = quantity_head_ele[i].value;
-   } 
-
-
-   var price_ele_array =[];
-   for(i=0;i<price_head_ele.length;i++){
-    price_ele_array[i] = price_head_ele[i].value;
-   } 
-
-   var total_ele_array =[];
-   for(i=0;i<total_head_ele_box.length;i++){
-    total_ele_array[i] = total_head_ele_box[i].innerHTML;
-   } 
-
-   var tax_items_array =[];
-   for(i=0;i<tax_items.length;i++){
-    tax_items_array[i] = tax_items[i].innerHTML;
-   } 
-
-   var tax_name_array =[];
-   for(i=0;i<tax_name_invoice.length;i++){
-    tax_name_array[i] = tax_name_invoice[i].innerHTML;
-   } 
-   
-   console.log(tax_name_array);
-
-   var invoice_details = {
-       customer_name : customer_name,
-       customer_phone_number : customer_phone_number,
-       customer_Email : customer_Email,
-       invoice_number : invoice_number,
-       date_invoice_app : date_invoice_app,
-       item_description_array : item_description_array,
-       price_ele_array : price_ele_array,
-       quantity_ele_array : quantity_ele_array,
-       total_ele_array : total_ele_array,
-       sub_total : sub_total,
-       tax_items_array : tax_items_array,
-       tax_name_array:tax_name_array,
-       final_total : final_total
-   };
-  var json_invoice = JSON.stringify(invoice_details);
-  localStorage.setItem('invoice_number_'+invoice_number, json_invoice);
-  sessionStorage.setItem('current_invoice',json_invoice)
-  open('../assets/invoice.html');
-}
-
-// code for switching tabs 
-var scroll_amt = document.getElementsByClassName('dashboard_item')[1].offsetHeight ; 
-var main_dashboard_box = document.getElementsByClassName('main_dashboard_box')[0];
-document.getElementById('home_tab_button').onclick = function(){
-  scroll_main_dashboard_box(0);
-}
-document.getElementById('invoice_tab_button').onclick = function(){
-  scroll_main_dashboard_box(scroll_amt);
-}
-document.getElementById('tax_tab_button').onclick = function(){
-  scroll_main_dashboard_box(scroll_amt*2);
-}
-document.getElementById('company_tab_button').onclick = function(){
-  scroll_main_dashboard_box(scroll_amt*3);
-}
-function scroll_main_dashboard_box(scroll){
-    var dashboard_item = document.getElementsByClassName('dashboard_item');
-    for(i=0;i<dashboard_item.length;i++){
-        dashboard_item[i].classList.add('blink_anim');
+    var item_description_array = [];
+    for (i = 0; i < item_description_ele.length; i++) {
+        item_description_array[i] = item_description_ele[i].value;
     }
-    setTimeout(() => {
-        for(i=0;i<dashboard_item.length;i++){
-            dashboard_item[i].classList.remove('blink_anim');
-        } 
-    }, 1200);
-    main_dashboard_box.scroll(0,scroll);
+
+
+    var quantity_ele_array = [];
+    for (i = 0; i < quantity_head_ele.length; i++) {
+        quantity_ele_array[i] = quantity_head_ele[i].value;
+    }
+
+
+    var price_ele_array = [];
+    for (i = 0; i < price_head_ele.length; i++) {
+        price_ele_array[i] = price_head_ele[i].value;
+    }
+
+    var total_ele_array = [];
+    for (i = 0; i < total_head_ele_box.length; i++) {
+        total_ele_array[i] = total_head_ele_box[i].innerHTML;
+    }
+
+    var tax_items_array = [];
+    for (i = 0; i < tax_items.length; i++) {
+        tax_items_array[i] = tax_items[i].innerHTML;
+    }
+
+    var tax_name_array = [];
+    for (i = 0; i < tax_name_invoice.length; i++) {
+        tax_name_array[i] = tax_name_invoice[i].innerHTML;
+    }
+
+    console.log(tax_name_array);
+
+    var invoice_details = {
+        customer_name: customer_name,
+        customer_phone_number: customer_phone_number,
+        customer_Email: customer_Email,
+        invoice_number: invoice_number,
+        date_invoice_app: date_invoice_app,
+        item_description_array: item_description_array,
+        price_ele_array: price_ele_array,
+        quantity_ele_array: quantity_ele_array,
+        total_ele_array: total_ele_array,
+        sub_total: sub_total,
+        tax_items_array: tax_items_array,
+        tax_name_array: tax_name_array,
+        final_total: final_total
+    };
+    var json_invoice = JSON.stringify(invoice_details);
+    localStorage.setItem('invoice_number_' + invoice_number, json_invoice);
+    sessionStorage.setItem('current_invoice', json_invoice)
+    open('../assets/invoice.html');
 }
 
+//calling funtion by clicking on tabs buttons present on side bar
+var scroll_amt = document.getElementsByClassName('dashboard_item')[1].offsetHeight;
+var main_dashboard_box = document.getElementsByClassName('main_dashboard_box')[0];
+document.getElementById('home_tab_button').onclick = function () {
+    scroll_main_dashboard_box(0);
+}
+document.getElementById('invoice_tab_button').onclick = function () {
+    var tab_box = document.getElementById('invoice_app');
+    scroll_main_dashboard_box(tab_box);
+}
+document.getElementById('tax_tab_button').onclick = function () {
+    var tab_box = document.getElementById('tax_app');
+    scroll_main_dashboard_box(tab_box);
+}
+document.getElementById('company_tab_button').onclick = function () {
+    var tab_box = document.getElementById('company_details_page');
+    scroll_main_dashboard_box(tab_box);
+}
+
+
+//function to switch tabs in app  
+function scroll_main_dashboard_box(current_box) {
+    var dashboard_item = document.getElementsByClassName('dashboard_item');
+
+    for (i = 0; i < dashboard_item.length; i++) {
+        dashboard_item[i].style.display = "none";
+    }
+
+    current_box.style.display = "block";
+}
