@@ -73,11 +73,15 @@ function put_data() {
     website_url.value = company_details.website_url;
     financial_year.value = company_details.financial_year;
     profile_picture_box.style.background = 'url(' + company_details.company_logo + ')';
+    profile_picture_box.style.backgroundSize = "cover";
     var profile_icon = document.getElementsByClassName("profile_icon")[0];
     profile_icon.style.background = 'url(' + company_details.company_logo + ')';
-
+    profile_icon.style.backgroundSize = "cover";
 }
-window.onload = put_data();
+
+window.onload = function () {
+    put_data();
+}
 
 //calling function for editing on clicking on input
 function edit_function_call() {
@@ -404,6 +408,8 @@ function tax_in_app(data) {
     tax_percentage_invoice.style.fontSize = '1rem';
 
 
+    
+
     var delete_tax = document.createElement('div');
     delete_tax.classList.add('delete_tax');
     delete_tax.classList.add('flex');
@@ -450,8 +456,28 @@ function calculating_total() {
     final_total.innerHTML = '&#8377; ' + (sub_total + tax_total);
 
 }
-//saving the invoice
-document.getElementById('save_button').onclick = function () {
+// save invoice button function 
+document.getElementById('save_button').onclick = function (){
+    save_invoice();
+}
+
+// view preview function
+document.getElementById('preview_button').onclick = function (){
+    alert();
+    save_invoice();
+    sessionStorage.setItem('print',"no");
+    open('../assets/invoice.html');
+}
+// print invoice function
+document.getElementById('print_button').onclick = function (){
+    alert();
+    save_invoice();
+    sessionStorage.setItem('print',"yes");
+    open('../assets/invoice.html');
+}
+
+//to save invoice data into storage
+function save_invoice() {
     var customer_name = document.getElementById('customer_name').value;
     var customer_phone_number = document.getElementById('customer_phone_number').value;
     var customer_Email = document.getElementById('customer_Email').value;
@@ -519,7 +545,7 @@ document.getElementById('save_button').onclick = function () {
     var json_invoice = JSON.stringify(invoice_details);
     localStorage.setItem('invoice_number_' + invoice_number, json_invoice);
     sessionStorage.setItem('current_invoice', json_invoice)
-    open('../assets/invoice.html');
+
 }
 
 //calling funtion by clicking on tabs buttons present on side bar
@@ -545,10 +571,9 @@ document.getElementById('company_tab_button').onclick = function () {
 //function to switch tabs in app  
 function scroll_main_dashboard_box(current_box) {
     var dashboard_item = document.getElementsByClassName('dashboard_item');
-
     for (i = 0; i < dashboard_item.length; i++) {
         dashboard_item[i].style.display = "none";
     }
-
     current_box.style.display = "block";
 }
+

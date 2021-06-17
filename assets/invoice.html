@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+ <script src="js/html2pdf.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
@@ -451,11 +451,13 @@ footer{
         document.getElementById('company_addrees').innerHTML = company_addrees;  
         document.getElementById('footer_contact_details').innerHTML = company_phone_number+'<br>0'+company_email;  
 
-        let doc = new jsPDF('p','pt','a4');
+        var print_statement = sessionStorage.getItem('print');
+        if(print_statement==='yes'){
+         var invoice = document.getElementsByClassName('invoice_con')[0];
+        html2pdf(invoice);
+        }
 
-        doc.addHTML(document.getElementsByClassName('invoice_con')[0],function() {
-        doc.save('invoice.pdf');
-         });
+  
 }
     data_in_invoice();
 </script>
