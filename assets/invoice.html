@@ -348,8 +348,6 @@ footer{
     function data_in_invoice(){
         var invoice_data_json = sessionStorage.getItem('current_invoice');
         var invoice_data = JSON.parse(invoice_data_json);
-        console.table(invoice_data);
-
         //writing data in page
         var customer_name = document.getElementById('customer_name');
         customer_name.innerHTML = invoice_data.customer_name;
@@ -454,7 +452,7 @@ footer{
         var print_statement = sessionStorage.getItem('print');
         if(print_statement==='yes'){
          var invoice = document.getElementsByClassName('invoice_con')[0];
-        html2pdf(invoice);
+        html2pdf(invoice,{scale:10});
         }
 
   

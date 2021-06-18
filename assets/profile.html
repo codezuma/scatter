@@ -3,7 +3,8 @@
 
 <head>
     <link rel="stylesheet" href="style/profile.css">
-    <link rel="stylesheet" href="../font/webfonts/style.css" <meta charset="UTF-8">
+    <link rel="stylesheet" href="../font/webfonts/style.css" >
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>profile</title>
@@ -189,9 +190,9 @@
                                     <div class="total_head_box">
                                         <div class="total_head_item">Sub-Total</div>
                                         <div class="total_head_item">Tax</div>
-                                        <div class="total_head_item">Total</div>
-                                        <div class="total_head_item">Paid</div>
-                                        <div class="total_head_item">Due</div>
+                                        <div class="total_head_item" id="final_total_head">Total</div>
+                                        <div class="total_head_item" id="paid_balance_head">Paid</div>
+                                        <div class="total_head_item"  id="due_balance_head">Due</div>
                                     </div>
                                     <div class="total_data_box">
                                         <div class="total_data_item" id="sub_total">&#8377; 0</div>
@@ -200,7 +201,7 @@
                                         <div class="total_data_item" id="">                                  
                                         <input type="number" id="paid_balance">
                                         </div>
-                                        <div class="total_data_item" id="">&#8377; 0</div>
+                                        <div class="total_data_item" id="due_amount">&#8377; 0</div>
 
                                     </div>
                                 </div>

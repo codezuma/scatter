@@ -408,7 +408,7 @@ function tax_in_app(data) {
     tax_percentage_invoice.style.fontSize = '1rem';
 
 
-    
+
 
     var delete_tax = document.createElement('div');
     delete_tax.classList.add('delete_tax');
@@ -440,7 +440,6 @@ function calculating_total() {
         var data = total_head_ele_box[i].innerHTML;
 
         var splited_data = data.split(' ');
-        console.log(splited_data[1]);
         sub_total = sub_total + Number(splited_data[1]);
     }
     sub_total_ele.innerHTML = '&#8377; ' + sub_total;
@@ -457,22 +456,22 @@ function calculating_total() {
 
 }
 // save invoice button function 
-document.getElementById('save_button').onclick = function (){
+document.getElementById('save_button').onclick = function () {
     save_invoice();
 }
 
 // view preview function
-document.getElementById('preview_button').onclick = function (){
+document.getElementById('preview_button').onclick = function () {
     alert();
     save_invoice();
-    sessionStorage.setItem('print',"no");
+    sessionStorage.setItem('print', "no");
     open('../assets/invoice.html');
 }
 // print invoice function
-document.getElementById('print_button').onclick = function (){
+document.getElementById('print_button').onclick = function () {
     alert();
     save_invoice();
-    sessionStorage.setItem('print',"yes");
+    sessionStorage.setItem('print', "yes");
     open('../assets/invoice.html');
 }
 
@@ -525,8 +524,6 @@ function save_invoice() {
         tax_name_array[i] = tax_name_invoice[i].innerHTML;
     }
 
-    console.log(tax_name_array);
-
     var invoice_details = {
         customer_name: customer_name,
         customer_phone_number: customer_phone_number,
@@ -577,3 +574,43 @@ function scroll_main_dashboard_box(current_box) {
     current_box.style.display = "block";
 }
 
+//function to calculate due amount of invoice
+document.getElementById("paid_balance").oninput = function () {
+    var total_amount_ele = document.getElementById('final_total');
+    var due_amount_ele = document.getElementById('due_amount');
+
+    //spliting element data to get due amount
+    var total_amount_split = total_amount_ele.innerHTML.split(' ');
+    due_amount_ele.innerHTML = '&#8377; ' + (Number(total_amount_split[1]) + (-Number(this.value)));
+
+}
+
+document.getElementById('paid_balance').onfocus = function () {
+    var due_amount_ele = document.getElementById('due_amount');
+    var due_balance_head = document.getElementById('due_balance_head');
+   
+    this.onkeypress = function (event) {
+        if (event.keyCode == 13) {
+            //changing color of due amount based on amount
+            var due_amount_split = due_amount_ele.innerHTML.split(' ');
+            var due_amount = due_amount_split[1];
+            alert(Number(due_amount));
+
+            if (Number(due_amount) === 0) {
+                due_balance_head.style.color = ' var(--green)';
+                due_amount_ele.style.color = ' var(--green)';
+            }
+
+            if (Number(due_amount) > 0) {
+                due_balance_head.style.color = ' var(--red)';
+                due_amount_ele.style.color = ' var(--red)';
+            }
+
+            if (Number(due_amount) < 0) {
+              alert('paid amount should be less than totla amount')
+            }
+            return false;
+
+        }
+    }
+}

@@ -23,6 +23,7 @@
     --font_color: white;
     --grey_color: #494A7D;
     --secondary_font_color: #a6a6c2;
+    --red:#D81E5B;
     --primary_gradient: linear-gradient(90deg, #D81E5B, #AF4A96);
     --green: #04A777;
     --secondary_font: raleway;
@@ -554,7 +555,7 @@ input[type=number]::-webkit-outer-spin-button{
     color: var(--background_color);
     
 }
-.total_head_item:last-child,.total_data_item:last-child{
+#final_total_head,#final_total{
     margin-top: 15px;
     border-top:2px var(--green) solid;
     font-size: 1.4rem;
@@ -730,7 +731,19 @@ input[type=number]::-webkit-outer-spin-button{
         opacity: 1;
     }
 }
-#paid_balance{
-    
+#paid_balance,#paid_balance_head{
     width: 100px;
+    font-size: 1.2rem;
+    height: 40px;
+}
+#paid_balance{
+    border-radius: 2px;
+    padding: 0 20px;
+    border: 2px dashed var(--grey_color);
+    outline: none;
+    color: var(--background_color_active);
+}
+#paid_balance:focus{
+    border-color: var(--green);
+    color: var(--background_color_active);
 }

@@ -190,7 +190,7 @@ function check(){
       console.log('company does not exist');
     }
     else{
-        console.log('company does  exist');
+/*         console.log('company does  exist'); */
 
         location.replace('assets/profile.html');
     }
