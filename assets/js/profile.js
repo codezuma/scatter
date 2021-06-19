@@ -457,22 +457,43 @@ function calculating_total() {
 }
 // save invoice button function 
 document.getElementById('save_button').onclick = function () {
+    if(confirm('confirm to save invoice')){
     save_invoice();
+
+    //changing invoice number number to next
+    var inovice_number_data = localStorage.getItem('invoice_number');
+    var new_invoice_number = Number(inovice_number_data)+1;
+    localStorage.setItem('invoice_number',new_invoice_number);
+    update_invoice_number();
+    }
 }
 
 // view preview function
 document.getElementById('preview_button').onclick = function () {
-    alert();
+
     save_invoice();
+    //saving data to tell invoice app to give only preview and do not download
     sessionStorage.setItem('print', "no");
     open('../assets/invoice.html');
-}
+
+ }
+
 // print invoice function
 document.getElementById('print_button').onclick = function () {
-    alert();
+    if(window.confirm('confirm to save invoice')){
+
     save_invoice();
+       //changing invoice number number to next
+       var inovice_number_data = localStorage.getItem('invoice_number');
+       var new_invoice_number = Number(inovice_number_data)+1;
+       localStorage.setItem('invoice_number',new_invoice_number);
+       update_invoice_number();
+    
+    //saving data to tell invoice app wheather to download the invoice 
+
     sessionStorage.setItem('print', "yes");
     open('../assets/invoice.html');
+    }
 }
 
 //to save invoice data into storage
@@ -622,4 +643,16 @@ document.getElementById('paid_balance').onfocus = function () {
     }
 }
 
-//
+// function to update invoice number in app
+function update_invoice_number(){
+    var invoice_number_ele = document.getElementById('invoice_number');
+
+    var inovice_number_data = localStorage.getItem('invoice_number');
+    if(inovice_number_data==null){
+        localStorage.setItem('invoice_number',1);
+    }
+    else{     
+        invoice_number_ele.innerHTML = '# '+inovice_number_data;
+    }
+}
+update_invoice_number();
