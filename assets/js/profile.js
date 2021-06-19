@@ -489,6 +489,11 @@ function save_invoice() {
     var sub_total = document.getElementById('sub_total').innerHTML;
     var tax_items = document.getElementsByClassName('tax_items');
     var tax_name_invoice = document.getElementsByClassName('tax_name_invoice');
+    var paid_amount = document.getElementById('paid_balance').value;
+    var due_amount_ele = document.getElementById('due_amount');
+    var due_amount_split = due_amount_ele.innerHTML.split(' ');
+    var due_amount = due_amount_split[1];
+
 
     var final_total = document.getElementById('final_total').innerHTML;
 
@@ -537,7 +542,9 @@ function save_invoice() {
         sub_total: sub_total,
         tax_items_array: tax_items_array,
         tax_name_array: tax_name_array,
-        final_total: final_total
+        final_total: final_total,
+        paid_amount:paid_amount,
+        due_amount:due_amount
     };
     var json_invoice = JSON.stringify(invoice_details);
     localStorage.setItem('invoice_number_' + invoice_number, json_invoice);
@@ -581,10 +588,10 @@ document.getElementById("paid_balance").oninput = function () {
 
     //spliting element data to get due amount
     var total_amount_split = total_amount_ele.innerHTML.split(' ');
-    due_amount_ele.innerHTML = '&#8377; ' + (Number(total_amount_split[1]) + (-Number(this.value)));
+    due_amount_ele.innerHTML = '&#8377; ' + (Number(total_amount_split[1])-(Number(this.value)));
 
 }
-
+// function to chage color of due amount based on paid
 document.getElementById('paid_balance').onfocus = function () {
     var due_amount_ele = document.getElementById('due_amount');
     var due_balance_head = document.getElementById('due_balance_head');
@@ -614,3 +621,5 @@ document.getElementById('paid_balance').onfocus = function () {
         }
     }
 }
+
+//
