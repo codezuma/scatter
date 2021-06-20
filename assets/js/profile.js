@@ -716,7 +716,7 @@ function show_invoice_home(){
            if(Number(due_amount)===0){
                status_li.innerHTML = 'paid';
                status_li.style.backgroundColor = 'var(--green_bg)';
-               status_li.style.color = 'var(--green_text)';
+               status_li.style.color = 'var(--green-text)';
            }
            if(Number(due_amount)>0){
                status_li.innerHTML = 'due';
