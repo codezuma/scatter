@@ -3,18 +3,18 @@
 
 <head>
     <link rel="stylesheet" href="style/profile.css">
-    <link rel="stylesheet" href="../font/webfonts/style.css" >
+    <link rel="stylesheet" href="../font/webfonts/style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>profile</title>
 </head>
- 
+
 <body class="flex">
     <!--       main app box -->
-  <div class="app_box flex">
+    <div class="app_box flex">
 
-<!-- side bar to control navigation  -->
+        <!-- side bar to control navigation  -->
         <div class="side_box flex">
             <div class="nav_head flex ">
                 <div class="app_icon"></div>
@@ -69,7 +69,7 @@
                         Tax
                     </div>
                 </div>
-                <div class="nav_item flex"  id="company_tab_button">
+                <div class="nav_item flex" id="company_tab_button">
                     <div class="nav_icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="27px" viewBox="0 0 24 24" width="27px"
                             fill="#646c9a">
@@ -85,9 +85,9 @@
             </div>
 
         </div>
-<!--         side bar code ends here -->
+        <!--         side bar code ends here -->
 
-<!--       dash board code starts here -->
+        <!--       dash board code starts here -->
         <div class="dashboard">
             <div class="dashboard_head">
                 <div class="ham_icon flex" id="ham_icon">
@@ -112,9 +112,70 @@
                 </div>
             </div>
 
-            <div class="main_dashboard_box" >
+            <div class="main_dashboard_box">
                 <div class="inner_dashboard_box">
-                    <div class="dashboard_item"></div>
+                    <div class="dashboard_item home_app">
+                        <div class="home_app_upper_box flex">
+                            <div class="bill_info_log flex">
+                                <div class="total_recieved_box flex">
+                                    <h3 class="total_recieved_head">TOTAL RECIEVED</h3>
+                                    <h1 class="total_recieved_amount">&#8377; <font> 1,52,550</font>
+                                    </h1>
+                                    <h5 class="monthly_increament">+10% since last month</h5>
+                                </div>
+                                <div class="pending_amount_box flex">
+                                    <div class="pending_amount_head">
+                                        <h5>
+                                            <li>pending</li>
+                                        </h5>
+                                        <h4 class="pending_amount">&#8377; 210,100</h4>
+                                    </div>
+                                    <div class="profit_amount_head">
+                                        <h5>
+                                            <li>Profit</li>
+                                        </h5>
+                                        <h4 class="profit_amount">&#8377; 210,100</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="home_app_lower_box">
+                            <div class="home_invoice_head_box flex">
+                                <div>
+                                    <h3 class="home_invoice_head">Invoices</h3>
+                                    <h4 class="home_invoice_secon_head">List of all your recent transactions</h4>
+                                </div>
+                                <button id='home_new_invoice_button'>+ New Invoice</button>
+                            </div>
+                            <div class="home_invoice_search_box flex">
+                                <div class="invoice_search_bar_box flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="search_icon" viewBox="-2.5 -2.5 24 24" width="24" height="24" preserveAspectRatio="xMinYMin" class="jam jam-search"><path d='M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414z'/></svg>
+                                    <input type="text" id="invoice_search_bar" placeholder="Search an Invoice">
+                                </div>
+                                <select class="sort_select">
+                                    <option>Show all</option>
+                                    <option>Paid</option>
+                                    <option>Due</option>
+                                </select>
+                            </div>
+                            <div class="invoice_table">
+                                <div class="table_head_box flex">
+                                    <div class="home_invoice_number_head">No.</div>
+                                    <div class="home_invoice_date_head">Date</div>
+                                    <div class="home_invoice_customer_head">Customer</div>
+                                    <div class="home_invoice_amount_head">Amount</div>
+                                    <div class="home_invoice_status_head">Status</div>
+                                </div>
+                                <div class="table_items flex">
+                                    <div class="home_invoice_number_head home_item_invoice_number"># 1</div>
+                                    <div class="home_invoice_date_head home_item_invoice_date">12-07-2019</div>
+                                    <div class="home_invoice_customer_head home_item_invoice_customer">Chandresh Patidar</div>
+                                    <div class="home_invoice_amount_head home_item_invoice_amount">&#8377; 500</div>
+                                    <div class="home_invoice_status_head home_item_invoice_status"><li>pending</li></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dashboard_item invoice_app" id="invoice_app">
 
                         <div class="invoice_app_upper_box flex">
@@ -137,11 +198,11 @@
                             <div class="invoice_info_box">
                                 <div class="customer_info_item">
                                     <h1 class="customer_info_head">Invoice Number : </h1>
-                                    <font class="invoice_number" id="invoice_number" ># 1</font>
+                                    <font class="invoice_number" id="invoice_number"># 1</font>
                                 </div>
                                 <div class="customer_info_item date">
                                     <h1 class="customer_info_head">Date: </h1>
-                                    <input class="customer_info_input date_invoice_app"  type="date" value="12/24/2019">
+                                    <input class="customer_info_input date_invoice_app" type="date" value="12/24/2019">
                                 </div>
                             </div>
                         </div>
@@ -192,14 +253,14 @@
                                         <div class="total_head_item">Tax</div>
                                         <div class="total_head_item" id="final_total_head">Total</div>
                                         <div class="total_head_item" id="paid_balance_head">Paid</div>
-                                        <div class="total_head_item"  id="due_balance_head">Due</div>
+                                        <div class="total_head_item" id="due_balance_head">Due</div>
                                     </div>
                                     <div class="total_data_box">
                                         <div class="total_data_item" id="sub_total">&#8377; 0</div>
                                         <div class="total_data_item" id="tax_total"> &nbsp;</div>
                                         <div class="total_data_item" id="final_total">&#8377; 0</div>
-                                        <div class="total_data_item" id="">                                  
-                                        <input type="number" id="paid_balance">
+                                        <div class="total_data_item" id="">
+                                            <input type="number" id="paid_balance">
                                         </div>
                                         <div class="total_data_item" id="due_amount">&#8377; 0</div>
 
@@ -217,7 +278,7 @@
                                 <button id="save_button" class="button">SAVE</button>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="dashboard_item tax_app" id="tax_app">
                         <div class="main_tax_app flex">
@@ -243,7 +304,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dashboard_item company_details_page flex" id="company_details_page" >
+                    <div class="dashboard_item company_details_page flex" id="company_details_page">
                         <div class="header_company_details flex">
                             <h1>Your profile </h1>
                             <div class="button_box">
@@ -296,7 +357,7 @@
                 </div>
             </div>
         </div>
-<!--         dashboard code ends here -->
+        <!--         dashboard code ends here -->
     </div>
 
 </body>

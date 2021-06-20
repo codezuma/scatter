@@ -30,7 +30,12 @@
     --background: #EFEFF5;
     --primary: #292B48;
     --purple: #9E6DE0;
+    --blue:#0450d4;
+    --blue_text:#004085;
+    --blue_bg:#CCE5FF;
     --light: #646c9a;
+    --green_bg:#DFFFF6;
+    --green-text:#00BA88;
     --dark_light:#373d5f;
     --light_hover: #b7baca;
 }
@@ -574,10 +579,10 @@ input[type=number]::-webkit-outer-spin-button{
 }
 .left_tax_app,.right_tax_app{
    height: 100%;
-   border: 2px solid black;
    padding: 5% 3%;
 }
 .left_tax_app{
+    border-right:2px solid var(--grey_color) ;
     width: 60%;
 }
 .all_taxes_con{
@@ -692,7 +697,7 @@ input[type=number]::-webkit-outer-spin-button{
     font-weight: 600;
     letter-spacing: 1px;
     cursor: pointer;
-    color: #0450d4;
+    color: var(--blue);
     border-radius: 5px; 
 }
 
@@ -703,12 +708,12 @@ input[type=number]::-webkit-outer-spin-button{
 }
 #print_button{
     background-color: transparent;
-    border: 2px dashed #0450d4;
+    border: 2px dashed var(--blue);
     margin-right: 20px;
 }
 #save_button{
     color: var(--background);
-    background-color: #0450d4;
+    background-color: var(--blue);
     border: none;
 }
 .blink_anim{
@@ -746,4 +751,185 @@ input[type=number]::-webkit-outer-spin-button{
 #paid_balance:focus{
     border-color: var(--green);
     color: var(--background_color_active);
+}
+.home_app{
+    padding: 3% 3%;
+}
+.home_app_upper_box{
+    width: 100%;
+    height: 200px;
+    padding: 1% 1%;
+    justify-content: space-between;
+}
+.bill_info_log{
+    width: 30%;
+    height: 100%;
+        min-width: 350px;
+    max-width: 400px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 6px 12px -6px rgba(24, 39, 75, 0.12), 0px 8px 24px -4px rgba(24, 39, 75, 0.08);
+}
+.total_recieved_box{
+    width: 60%;
+    height: 100%;
+    flex-direction:column;
+}
+.pending_amount_box{
+    width: 40%;
+    height: 100%;
+    flex-direction: column;
+}
+.total_recieved_head{
+    font-weight: 400;
+    color: var(--secondary_font_color);
+}
+.total_recieved_amount {
+    margin-top: 10px;
+    color: var(--background_color);
+}
+.monthly_increament{
+    margin-top: 15px;
+    color: var(--green-text);
+    background-color: var(--green_bg);
+    padding:2% 5%;
+    border-radius: 2px;
+    border: 1.8px solid var(--green-text);
+}
+.pending_amount_box{
+    padding:5% 0;
+    justify-content: space-around;
+}
+.pending_amount_head li{
+    color: rgb(209, 137, 2);
+    margin-bottom: 5px;
+    list-style-position:inside;
+}
+.pending_amount{
+    color: var(--primary);
+}
+.profit_amount_head li{
+    list-style-position:inside;
+    color: var(--green);
+    margin-bottom: 5px;
+
+}
+.profit_amount{
+color: var(--primary);
+}
+.home_app_lower_box{
+    padding:1% 1%;
+}
+.home_invoice_head_box{
+    width: 100%;
+    height: 80px;
+    justify-content: space-between;
+}
+.home_invoice_search_box{
+    justify-content: space-between;
+}
+.home_invoice_head{
+    font-weight: 700;
+    color: var(--primary);
+}
+.home_invoice_secon_head{
+    font-weight: 400;
+    color: var(--light);
+}
+#home_new_invoice_button{
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    padding: 1% 1.5%;
+    border-radius: 3px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 6px 12px -6px rgba(107, 151, 255, 0.12), 0px 8px 24px -4px rgba(97, 134, 219, 0.08);    ;
+}
+#home_new_invoice_button:hover{
+    background-color: rgb(3, 46, 175);
+}
+.invoice_search_bar_box{
+    width: 70%;
+}
+#invoice_search_bar{
+    width: 100%;
+    height: 40px;
+    padding: 1% 6%;
+    border: 2px solid var(--light_hover);
+    border-radius: 3px;
+    outline: none;
+    caret-color: var(--primary);
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing:.5px;
+}
+#invoice_search_bar::placeholder{
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--light);
+}
+.search_icon{
+    position: relative;
+    margin-left: 0px;
+    margin-right: -32px;
+}
+#invoice_search_bar:focus{
+    border-color: var(--background_color_active);
+    box-shadow: 0px 6px 12px -6px rgba(107, 151, 255, 0.12), 0px 8px 24px -4px rgba(97, 134, 219, 0.08);    
+}
+.sort_select{
+    width: 120px;
+    height: 40px;
+    font-size: 1rem;
+    padding: .5% 1%;
+}
+.search_icon path{
+    fill: var(--light);
+}
+.table_head_box{
+    width: 100%;
+    padding: 0 1.5%;
+    justify-content: space-around;
+    margin-top: 15px;
+    border: 2px solid transparent;
+
+}
+.home_invoice_number_head,.home_invoice_customer_head,.home_invoice_date_head,.home_invoice_amount_head,.home_invoice_status_head{
+    width: 15%;
+    color: var(--light);
+    height: 30px;
+    padding: 1% 5px;
+    display: flex;
+    align-items: center;
+}
+.home_invoice_customer_head{
+    width: 40%;
+}
+.table_items{
+    padding: 0 1.5%;
+    width: 100%;
+    height: 50px;
+    color: var(--primary);
+    background-color: white;
+/*     border: 2px solid var(--light_hover);
+ */    border-radius: 5px;
+    box-shadow: 0px 6px 12px -6px rgba(24, 39, 75, 0.12), 0px 8px 24px -4px rgba(24, 39, 75, 0.08);
+}
+
+.home_item_invoice_number{
+    font-weight: 700;
+    color: var(--background_color) ;
+}
+.home_item_invoice_date,.home_item_invoice_customer,.home_item_invoice_amount{
+    color: var(--background_color_active);
+}
+.home_item_invoice_status li{
+    font-size: .9rem;
+    color: var(--blue);
+    background-color: var(--blue_bg);
+    padding: 3% 8%;
+    list-style-position: inside;
+    border-radius: 5px;
 }

@@ -459,12 +459,13 @@ function calculating_total() {
 document.getElementById('save_button').onclick = function () {
     if(confirm('confirm to save invoice')){
     save_invoice();
-
+     
     //changing invoice number number to next
     var inovice_number_data = localStorage.getItem('invoice_number');
     var new_invoice_number = Number(inovice_number_data)+1;
     localStorage.setItem('invoice_number',new_invoice_number);
     update_invoice_number();
+    location.reload();
     }
 }
 
@@ -481,7 +482,7 @@ document.getElementById('preview_button').onclick = function () {
 // print invoice function
 document.getElementById('print_button').onclick = function () {
     if(window.confirm('confirm to save invoice')){
-
+    
     save_invoice();
        //changing invoice number number to next
        var inovice_number_data = localStorage.getItem('invoice_number');
@@ -493,6 +494,8 @@ document.getElementById('print_button').onclick = function () {
 
     sessionStorage.setItem('print', "yes");
     open('../assets/invoice.html');
+    
+    location.reload();
     }
 }
 
