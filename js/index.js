@@ -1,4 +1,4 @@
-var next_buttons = document.getElementsByClassName("next_buttom");
+    var next_buttons = document.getElementsByClassName("next_buttom");
 var back_buttons = document.getElementsByClassName("back_button");
 var inner_ver_bar = document.getElementsByClassName("inner_ver_bar")[0];
 var icon_circle = document.getElementsByClassName("icon_circle");

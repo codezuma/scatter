@@ -659,3 +659,76 @@ function update_invoice_number(){
     }
 }
 update_invoice_number();
+
+//fetching data from storage and showing it in home app
+function show_invoice_home(){
+    var invoice_table = document.getElementsByClassName('invoice_table')[0];
+
+    // taking data from storage
+    for(i=0;i<localStorage.length;i++){
+        if(localStorage.key(i).match('invoice_number_#')){
+           var invoice_data_json =  localStorage.getItem(localStorage.key(i));
+           var invoice_data =  JSON.parse(invoice_data_json);
+
+           // creating elements based on data 
+           var table_item =  document.createElement('div');
+           table_item.classList.add('table_items');
+           table_item.classList.add('flex');
+           invoice_table.appendChild(table_item);
+
+           var invoice_number =  document.createElement('div');
+           invoice_number.classList.add('home_invoice_number_head');
+           invoice_number.classList.add('home_item_invoice_number');
+           invoice_number.innerHTML = invoice_data.invoice_number;
+           table_item.appendChild(invoice_number);
+
+           var invoice_date =  document.createElement('div');
+           invoice_date.classList.add('home_invoice_date_head');
+           invoice_date.classList.add('home_item_invoice_date');
+           invoice_date.innerHTML = invoice_data.date_invoice_app;
+           table_item.appendChild(invoice_date);
+
+           var invoice_customer_name =  document.createElement('div');
+           invoice_customer_name.classList.add('home_item_invoice_customer');
+           invoice_customer_name.classList.add('home_invoice_customer_head');
+           invoice_customer_name.innerHTML = invoice_data.customer_name;
+           table_item.appendChild(invoice_customer_name); 
+
+           var invoice_amount =  document.createElement('div');
+           invoice_amount.classList.add('home_invoice_date_head');
+           invoice_amount.classList.add('home_item_invoice_date');
+           invoice_amount.innerHTML = invoice_data.final_total;
+           table_item.appendChild(invoice_amount);
+
+           var invoice_status =  document.createElement('div');
+           invoice_status.classList.add('home_item_invoice_status');
+           invoice_status.classList.add('home_invoice_status_head');
+           var status_li = document.createElement('li');
+           invoice_status.appendChild(status_li);
+           table_item.appendChild(invoice_status);
+
+           //code for calculating the staus of invoice
+           var due_amount = invoice_data.due_amount;
+           var final_amount_ele = invoice_data.final_total;
+           var final_amount_split = final_amount_ele.split(' ');
+           var final_amount = final_amount_split[1];
+
+           if(Number(due_amount)===0){
+               status_li.innerHTML = 'paid';
+               status_li.style.backgroundColor = 'var(--green_bg)';
+               status_li.style.color = 'var(--green_text)';
+           }
+           if(Number(due_amount)>0){
+               status_li.innerHTML = 'due';
+               status_li.style.backgroundColor = 'var(--orange_bg)';
+               status_li.style.color = 'var(--orange_text)';
+           }
+           if(Number(due_amount)==Number(final_amount)){
+               status_li.innerHTML = 'pending';
+               status_li.style.backgroundColor = 'var(--red_bg)';
+               status_li.style.color = 'var(--red)';           }
+
+        }
+    }
+}
+show_invoice_home();
