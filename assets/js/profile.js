@@ -573,7 +573,7 @@ function save_invoice() {
     var json_invoice = JSON.stringify(invoice_details);
     localStorage.setItem('invoice_number_' + invoice_number, json_invoice);
     sessionStorage.setItem('current_invoice', json_invoice)
-
+    show_invoice_home();
 }
 
 //calling funtion by clicking on tabs buttons present on side bar
@@ -732,3 +732,49 @@ function show_invoice_home(){
     }
 }
 show_invoice_home();
+
+
+// invoice search bar 
+document.getElementById('invoice_search_bar').onkeypress = function(event){
+    if(event.keyCode==13){
+        var table = document.getElementsByClassName('invoice_table')[0];
+        var table_items =  table.getElementsByClassName('table_items');
+            for(i=0;i<table_items.length;i++){  
+           
+           //selectiing wheather it should go to anme search or invoice numbre search
+           if(isNaN(this.value)){
+
+            //search with customer name
+            var customer_name = table_items[i].getElementsByClassName('home_item_invoice_customer')[0].innerHTML;
+            if(customer_name.match(this.value)){
+                table_items[i].style.display = 'flex';
+            }
+            else{
+                table_items[i].style.display = 'none';
+            }
+
+        }
+
+        else{
+
+           // search with invoice number 
+            var invoice_number = table_items[i].getElementsByClassName('home_item_invoice_number')[0].innerHTML;  
+
+            if(invoice_number.match(this.value)){
+                table_items[i].style.display = 'flex';
+            }
+            
+            else{
+                table_items[i].style.display = 'none';
+            }
+        }
+     }
+
+    }
+}
+
+function demo(){
+ var a="5";
+ alert(isNaN(a));
+}
+demo();
