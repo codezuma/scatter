@@ -786,12 +786,17 @@ document.getElementById('invoice_sort_select').onchange = function () {
 
     for (i = 0; i < table_items.length; i++) {
         var invoice_status = table_items[i].getAttribute('status');
-        
-        
-        if (sort_value == invoice_status) {
+
+        if (sort_value == 'show all') {
             table_items[i].style.display = 'flex';
-        } else {
-            table_items[i].style.display = 'none';
+        } 
+        else {
+            if (sort_value == invoice_status) {
+                table_items[i].style.display = 'flex';
+            } else {
+                table_items[i].style.display = 'none';
+            }
         }
+
     }
 }
