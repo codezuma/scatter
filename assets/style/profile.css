@@ -65,6 +65,7 @@ body {
 .app_box {
     width: 100vw;
     height: 100vh;
+    min-width: 1100px;
     background-color: var(--background);
 }
 

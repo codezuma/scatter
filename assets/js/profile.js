@@ -457,15 +457,15 @@ function calculating_total() {
 }
 // save invoice button function 
 document.getElementById('save_button').onclick = function () {
-    if(confirm('confirm to save invoice')){
-    save_invoice();
-     
-    //changing invoice number number to next
-    var inovice_number_data = localStorage.getItem('invoice_number');
-    var new_invoice_number = Number(inovice_number_data)+1;
-    localStorage.setItem('invoice_number',new_invoice_number);
-    update_invoice_number();
-    location.reload();
+    if (confirm('confirm to save invoice')) {
+        save_invoice();
+
+        //changing invoice number number to next
+        var inovice_number_data = localStorage.getItem('invoice_number');
+        var new_invoice_number = Number(inovice_number_data) + 1;
+        localStorage.setItem('invoice_number', new_invoice_number);
+        update_invoice_number();
+        location.reload();
     }
 }
 
@@ -477,25 +477,25 @@ document.getElementById('preview_button').onclick = function () {
     sessionStorage.setItem('print', "no");
     open('../assets/invoice.html');
 
- }
+}
 
 // print invoice function
 document.getElementById('print_button').onclick = function () {
-    if(window.confirm('confirm to save invoice')){
-    
-    save_invoice();
-       //changing invoice number number to next
-       var inovice_number_data = localStorage.getItem('invoice_number');
-       var new_invoice_number = Number(inovice_number_data)+1;
-       localStorage.setItem('invoice_number',new_invoice_number);
-       update_invoice_number();
-    
-    //saving data to tell invoice app wheather to download the invoice 
+    if (window.confirm('confirm to save invoice')) {
 
-    sessionStorage.setItem('print', "yes");
-    open('../assets/invoice.html');
-    
-    location.reload();
+        save_invoice();
+        //changing invoice number number to next
+        var inovice_number_data = localStorage.getItem('invoice_number');
+        var new_invoice_number = Number(inovice_number_data) + 1;
+        localStorage.setItem('invoice_number', new_invoice_number);
+        update_invoice_number();
+
+        //saving data to tell invoice app wheather to download the invoice 
+
+        sessionStorage.setItem('print', "yes");
+        open('../assets/invoice.html');
+
+        location.reload();
     }
 }
 
@@ -567,8 +567,8 @@ function save_invoice() {
         tax_items_array: tax_items_array,
         tax_name_array: tax_name_array,
         final_total: final_total,
-        paid_amount:paid_amount,
-        due_amount:due_amount
+        paid_amount: paid_amount,
+        due_amount: due_amount
     };
     var json_invoice = JSON.stringify(invoice_details);
     localStorage.setItem('invoice_number_' + invoice_number, json_invoice);
@@ -612,14 +612,14 @@ document.getElementById("paid_balance").oninput = function () {
 
     //spliting element data to get due amount
     var total_amount_split = total_amount_ele.innerHTML.split(' ');
-    due_amount_ele.innerHTML = '&#8377; ' + (Number(total_amount_split[1])-(Number(this.value)));
+    due_amount_ele.innerHTML = '&#8377; ' + (Number(total_amount_split[1]) - (Number(this.value)));
 
 }
 // function to chage color of due amount based on paid
 document.getElementById('paid_balance').onfocus = function () {
     var due_amount_ele = document.getElementById('due_amount');
     var due_balance_head = document.getElementById('due_balance_head');
-   
+
     this.onkeypress = function (event) {
         if (event.keyCode == 13) {
             //changing color of due amount based on amount
@@ -638,7 +638,7 @@ document.getElementById('paid_balance').onfocus = function () {
             }
 
             if (Number(due_amount) < 0) {
-              alert('paid amount should be less than totla amount')
+                alert('paid amount should be less than totla amount')
             }
             return false;
 
@@ -647,86 +647,89 @@ document.getElementById('paid_balance').onfocus = function () {
 }
 
 // function to update invoice number in app
-function update_invoice_number(){
+function update_invoice_number() {
     var invoice_number_ele = document.getElementById('invoice_number');
 
     var inovice_number_data = localStorage.getItem('invoice_number');
-    if(inovice_number_data==null){
-        localStorage.setItem('invoice_number',1);
-    }
-    else{     
-        invoice_number_ele.innerHTML = '# '+inovice_number_data;
+    if (inovice_number_data == null) {
+        localStorage.setItem('invoice_number', 1);
+    } else {
+        invoice_number_ele.innerHTML = '# ' + inovice_number_data;
     }
 }
 update_invoice_number();
 
 //fetching data from storage and showing it in home app
-function show_invoice_home(){
+function show_invoice_home() {
     var invoice_table = document.getElementsByClassName('invoice_table')[0];
 
     // taking data from storage
-    for(i=0;i<localStorage.length;i++){
-        if(localStorage.key(i).match('invoice_number_#')){
-           var invoice_data_json =  localStorage.getItem(localStorage.key(i));
-           var invoice_data =  JSON.parse(invoice_data_json);
+    for (i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).match('invoice_number_#')) {
+            var invoice_data_json = localStorage.getItem(localStorage.key(i));
+            var invoice_data = JSON.parse(invoice_data_json);
 
-           // creating elements based on data 
-           var table_item =  document.createElement('div');
-           table_item.classList.add('table_items');
-           table_item.classList.add('flex');
-           invoice_table.appendChild(table_item);
+            // creating elements based on data 
+            var table_item = document.createElement('div');
+            table_item.classList.add('table_items');
+            table_item.classList.add('flex');
+            invoice_table.appendChild(table_item);
 
-           var invoice_number =  document.createElement('div');
-           invoice_number.classList.add('home_invoice_number_head');
-           invoice_number.classList.add('home_item_invoice_number');
-           invoice_number.innerHTML = invoice_data.invoice_number;
-           table_item.appendChild(invoice_number);
+            var invoice_number = document.createElement('div');
+            invoice_number.classList.add('home_invoice_number_head');
+            invoice_number.classList.add('home_item_invoice_number');
+            invoice_number.innerHTML = invoice_data.invoice_number;
+            table_item.appendChild(invoice_number);
 
-           var invoice_date =  document.createElement('div');
-           invoice_date.classList.add('home_invoice_date_head');
-           invoice_date.classList.add('home_item_invoice_date');
-           invoice_date.innerHTML = invoice_data.date_invoice_app;
-           table_item.appendChild(invoice_date);
+            var invoice_date = document.createElement('div');
+            invoice_date.classList.add('home_invoice_date_head');
+            invoice_date.classList.add('home_item_invoice_date');
+            invoice_date.innerHTML = invoice_data.date_invoice_app;
+            table_item.appendChild(invoice_date);
 
-           var invoice_customer_name =  document.createElement('div');
-           invoice_customer_name.classList.add('home_item_invoice_customer');
-           invoice_customer_name.classList.add('home_invoice_customer_head');
-           invoice_customer_name.innerHTML = invoice_data.customer_name;
-           table_item.appendChild(invoice_customer_name); 
+            var invoice_customer_name = document.createElement('div');
+            invoice_customer_name.classList.add('home_item_invoice_customer');
+            invoice_customer_name.classList.add('home_invoice_customer_head');
+            invoice_customer_name.innerHTML = invoice_data.customer_name;
+            table_item.appendChild(invoice_customer_name);
 
-           var invoice_amount =  document.createElement('div');
-           invoice_amount.classList.add('home_invoice_date_head');
-           invoice_amount.classList.add('home_item_invoice_date');
-           invoice_amount.innerHTML = invoice_data.final_total;
-           table_item.appendChild(invoice_amount);
+            var invoice_amount = document.createElement('div');
+            invoice_amount.classList.add('home_invoice_date_head');
+            invoice_amount.classList.add('home_item_invoice_date');
+            invoice_amount.innerHTML = invoice_data.final_total;
+            table_item.appendChild(invoice_amount);
 
-           var invoice_status =  document.createElement('div');
-           invoice_status.classList.add('home_item_invoice_status');
-           invoice_status.classList.add('home_invoice_status_head');
-           var status_li = document.createElement('li');
-           invoice_status.appendChild(status_li);
-           table_item.appendChild(invoice_status);
+            var invoice_status = document.createElement('div');
+            invoice_status.classList.add('home_item_invoice_status');
+            invoice_status.classList.add('home_invoice_status_head');
+            var status_li = document.createElement('li');
+            invoice_status.appendChild(status_li);
+            table_item.appendChild(invoice_status);
 
-           //code for calculating the staus of invoice
-           var due_amount = invoice_data.due_amount;
-           var final_amount_ele = invoice_data.final_total;
-           var final_amount_split = final_amount_ele.split(' ');
-           var final_amount = final_amount_split[1];
+            //code for calculating the staus of invoice
+            var due_amount = invoice_data.due_amount;
+            var final_amount_ele = invoice_data.final_total;
+            var final_amount_split = final_amount_ele.split(' ');
+            var final_amount = final_amount_split[1];
 
-           if(Number(due_amount)===0){
-               status_li.innerHTML = 'paid';
-               status_li.style.backgroundColor = 'var(--green_bg)';
-               status_li.style.color = 'var(--green-text)';
-           }
-           if(Number(due_amount)>0){
-               status_li.innerHTML = 'due';
-               status_li.style.backgroundColor = 'var(--orange_bg)';
-               status_li.style.color = 'var(--orange_text)';
-           }
-           if(Number(due_amount)==Number(final_amount)){
-               status_li.innerHTML = 'pending';
-               status_li.style.backgroundColor = 'var(--red_bg)';
-               status_li.style.color = 'var(--red)';           }
+            if (Number(due_amount) === 0) {
+                status_li.innerHTML = 'paid';
+                table_item.setAttribute("status", 'paid');
+                status_li.style.backgroundColor = 'var(--green_bg)';
+                status_li.style.color = 'var(--green-text)';
+            }
+            if (Number(due_amount) > 0) {
+                status_li.innerHTML = 'due';
+                table_item.setAttribute("status", 'due');
+                status_li.style.backgroundColor = 'var(--orange_bg)';
+                status_li.style.color = 'var(--orange_text)';
+            }
+            if (Number(due_amount) == Number(final_amount)) {
+                status_li.innerHTML = 'pending';
+                table_item.setAttribute("status", 'pending');
+                status_li.style.backgroundColor = 'var(--red_bg)';
+                status_li.style.color = 'var(--red)';
+            }
 
         }
     }
@@ -735,46 +738,60 @@ show_invoice_home();
 
 
 // invoice search bar 
-document.getElementById('invoice_search_bar').onkeypress = function(event){
-    if(event.keyCode==13){
+document.getElementById('invoice_search_bar').onkeypress = function (event) {
+    if (event.keyCode == 13) {
         var table = document.getElementsByClassName('invoice_table')[0];
-        var table_items =  table.getElementsByClassName('table_items');
-            for(i=0;i<table_items.length;i++){  
-           
-           //selectiing wheather it should go to anme search or invoice numbre search
-           if(isNaN(this.value)){
+        var table_items = table.getElementsByClassName('table_items');
+        for (i = 0; i < table_items.length; i++) {
 
-            //search with customer name
-            var customer_name = table_items[i].getElementsByClassName('home_item_invoice_customer')[0].innerHTML;
-            if(customer_name.match(this.value)){
-                table_items[i].style.display = 'flex';
-            }
-            else{
-                table_items[i].style.display = 'none';
-            }
+            //selectiing wheather it should go to anme search or invoice numbre search
+            if (isNaN(this.value)) {
 
-        }
+                //search with customer name
+                var customer_name = table_items[i].getElementsByClassName('home_item_invoice_customer')[0].innerHTML;
+                if (customer_name.match(this.value)) {
+                    table_items[i].style.display = 'flex';
+                } else {
+                    table_items[i].style.display = 'none';
+                }
 
-        else{
+            } else {
 
-           // search with invoice number 
-            var invoice_number = table_items[i].getElementsByClassName('home_item_invoice_number')[0].innerHTML;  
+                // search with invoice number 
+                var invoice_number = table_items[i].getElementsByClassName('home_item_invoice_number')[0].innerHTML;
 
-            if(invoice_number.match(this.value)){
-                table_items[i].style.display = 'flex';
-            }
-            
-            else{
-                table_items[i].style.display = 'none';
+                if (invoice_number.match(this.value)) {
+                    table_items[i].style.display = 'flex';
+                } else {
+                    table_items[i].style.display = 'none';
+                }
             }
         }
-     }
 
     }
 }
 
-function demo(){
- var a="5";
- alert(isNaN(a));
+//  function for new invoice button in home app
+document.getElementById('home_new_invoice_button').onclick = function () {
+    var tab_button = document.getElementById('invoice_tab_button');
+    tab_button.click();
 }
-demo();
+
+// funtion to sort the invoice items according to the status
+document.getElementById('invoice_sort_select').onchange = function () {
+
+    var sort_value = this.value;
+    var table = document.getElementsByClassName('invoice_table')[0];
+    var table_items = table.getElementsByClassName('table_items');
+
+    for (i = 0; i < table_items.length; i++) {
+        var invoice_status = table_items[i].getAttribute('status');
+        
+        
+        if (sort_value == invoice_status) {
+            table_items[i].style.display = 'flex';
+        } else {
+            table_items[i].style.display = 'none';
+        }
+    }
+}
